@@ -49,6 +49,7 @@ Combined_datasets <- full_join(Orig_healthresource_doctors, Orig_healthutil_wait
 
 #Medical Graduates Plot
 Combined_datasets %>% 
+  filter(year == '2015' | year == '2016' | year == '2017' | year == '2018' | year == '2019' | year == '2020' | year == '2021') %>% 
   ggplot(aes(x = year, y = medical_graduates_per_100_000_population, group = country, colour = country)) +
   geom_line() +
   labs(title = 'Medical Graduates per Year', x = 'Year', y = "Graduates per 100 000 people") + 
@@ -57,12 +58,14 @@ Combined_datasets %>%
 
 #Waiting times plot
 Combined_datasets %>% 
-  select(year, country, cataract_percent_waiting_3_months, hip_replacement_waiting_3_months, knee_replacement_waiting_3_months, prostatectomy_waiting_3_months, coronary_bypass_waiting_3_months, coronary_angio_waiting_3_months, hysterectomy_waiting_3_months) %>% 
+  select(year, country, cataract_percent_waiting_3_months, hip_replacement_waiting_3_months, knee_replacement_waiting_3_months, prostatectomy_waiting_3_months, coronary_bypass_waiting_3_months, coronary_angio_waiting_3_months, hysterectomy_waiting_3_months) %>%
+  filter(year == '2015' | year == '2016' | year == '2017' | year == '2018' | year == '2019' | year == '2020' | year == '2021') %>% 
   pivot_longer(cols = cataract_percent_waiting_3_months:hysterectomy_waiting_3_months, names_to = 'operation', values_to = 'percent') %>% 
   ggplot(aes(x = year, y = percent, group = operation, colour = operation)) +
   geom_line() +
   facet_wrap(vars(country)) +
   theme(legend.key.size = unit(0.2, 'cm'))
+ 
 
   
   
