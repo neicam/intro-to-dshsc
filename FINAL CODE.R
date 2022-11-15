@@ -43,7 +43,7 @@ joinedgraduatesanddoctors <-
 
 joinedgraduatesanddoctors <- joinedgraduatesanddoctors %>% 
   mutate(Doctors_and_Graduates_per_1000 = graduatesper1000+Value.y) %>% 
-  filter(TIME.y == "2020")
+  filter(TIME.y == "2020", TIME.x == "2020")
 
 doctors_2020_map <- joinedgraduatesanddoctors %>% 
   select(LOCATION, Doctors_and_Graduates_per_1000)
@@ -52,8 +52,6 @@ mapworld <- countryExData %>%
   full_join(doctors_2020_map, by = c("ISO3V10" = "LOCATION"))
 
 #World Map
-mapCountryData()
-data("mapworld",envir=environment(),package="rworldmap")
 sPDF <- joinCountryData2Map(mapworld
                             , joinCode = "ISO3"
                             , nameJoinColumn = "ISO3V10")
@@ -64,8 +62,6 @@ mapCountryData(sPDF
                 , missingCountryCol='white') 
 
 #Europe Map
-mapCountryData()
-data("mapworld",envir=environment(),package="rworldmap")
 sPDF <- joinCountryData2Map(mapworld
                             , joinCode = "ISO3"
                             , nameJoinColumn = "ISO3V10")
@@ -100,6 +96,10 @@ joinedfortablehip %>%
                              "Doctors & Medical Graduates per 1000",
                              "Waiting times for Hip Procedures Mean days")) %>%
   kable_classic_2()
+
+
+
+
 
 
 
